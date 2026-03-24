@@ -41,7 +41,6 @@ _ReSharper*/
 
 # Environment variables
 .env
-appsettings.Development.json
 
 # NuGet Packages
 *.nupkg
