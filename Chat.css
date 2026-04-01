@@ -1,0 +1,115 @@
+/* src/components/Chat.css */
+.chat-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-hd {
+  padding: 9px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.chat-hd span {
+  font-family: var(--title);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
+.chat-msgs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.chat-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text3);
+  font-size: 12px;
+  padding: 20px 0;
+}
+
+/* ── Bolhas de mensagem ── */
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 68%;
+  animation: slideIn .2s ease forwards;
+  opacity: 0;
+}
+
+.msg.op  { align-self: flex-end;   align-items: flex-end; }
+.msg.usr { align-self: flex-start; }
+
+.msg-bub {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.msg.op  .msg-bub { background: var(--blue);  color: #fff;          border-bottom-right-radius: 2px; }
+.msg.usr .msg-bub { background: var(--bg3);   border: 1px solid var(--border); color: var(--text1); border-bottom-left-radius: 2px; }
+
+.msg-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+}
+
+/* ── Input de envio ── */
+.chat-input-row {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+  background: var(--bg1);
+}
+
+.chat-inp {
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text1);
+  font-family: var(--body);
+  font-size: 13px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color .2s;
+}
+
+.chat-inp:focus        { border-color: var(--blue); }
+.chat-inp::placeholder { color: var(--text3); }
+
+.btn-send {
+  background: var(--blue);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: var(--title);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  transition: background .15s;
+  white-space: nowrap;
+}
+
+.btn-send:hover { background: var(--blue2); }

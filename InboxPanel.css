@@ -1,0 +1,117 @@
+/* src/components/InboxPanel.css */
+.inbox-panel {
+  background: var(--bg1);
+  border-right: 1px solid var(--border);
+}
+
+.inbox-badge {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 10px;
+  animation: pulse 2s infinite;
+}
+
+.inbox-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ── Card de denúncia ── */
+.denuncia-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 11px 12px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: background .15s, border-color .15s, transform .15s;
+  animation: slideIn .25s ease forwards;
+  opacity: 0;
+}
+
+.denuncia-card:hover {
+  background: var(--bg3);
+  border-color: var(--border2);
+  transform: translateX(3px);
+}
+
+.denuncia-card.alta  { border-left-color: var(--red); }
+.denuncia-card.media { border-left-color: var(--amber); }
+.denuncia-card.baixa { border-left-color: var(--green); }
+
+.dc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.dc-local {
+  font-size: 11px;
+  color: var(--text2);
+  margin-bottom: 4px;
+}
+
+.dc-desc {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.dc-foot {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dc-anexos {
+  display: flex;
+  gap: 4px;
+}
+
+.attach {
+  font-size: 9px;
+  color: var(--text3);
+  background: var(--bg0);
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+
+.dc-hora {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text3);
+  margin-left: auto;
+}
+
+/* ── Estado vazio ── */
+.inbox-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text3);
+  font-size: 12px;
+  padding: 40px 0;
+}
+
+.inbox-empty svg {
+  width: 36px;
+  height: 36px;
+  opacity: .2;
+}
