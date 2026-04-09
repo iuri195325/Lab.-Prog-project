@@ -1,0 +1,108 @@
+/* src/components/DetailPanel.css */
+.detail-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg1);
+}
+
+/* ── Placeholder (sem caso selecionado) ── */
+.detail-placeholder {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text3);
+}
+
+.detail-placeholder svg {
+  width: 48px;
+  height: 48px;
+  opacity: .12;
+}
+
+.detail-placeholder p {
+  font-size: 13px;
+}
+
+/* ── Modo com caso ── */
+.detail-view {
+  flex: 1;
+}
+
+/* Cabeçalho */
+.dv-header {
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.dv-casoid {
+  font-family: var(--mono);
+  font-size: 24px;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.dv-casoid::before {
+  content: '# ';
+  opacity: .45;
+}
+
+.dv-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dv-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text2);
+}
+
+.dv-meta-item label {
+  font-family: var(--title);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+/* Info grid */
+.dv-info {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.dv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.info-field label {
+  display: block;
+  font-family: var(--title);
+  font-size: 10px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 2px;
+}
+
+.info-field p {
+  font-size: 13px;
+  color: var(--text1);
+  line-height: 1.4;
+}
+
+.anon-id {
+  font-family: var(--mono) !important;
+  color: var(--text2) !important;
+}
