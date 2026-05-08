@@ -1,4 +1,3 @@
-// src/components/CasosPanel.jsx
 import './CasosPanel.css'
 
 export default function CasosPanel({ casos, casoSelecionado, onSelecionar }) {
@@ -18,7 +17,7 @@ export default function CasosPanel({ casos, casoSelecionado, onSelecionar }) {
             onClick={() => onSelecionar(c.id)}
           >
             <div className="ci-top">
-              <span className="ci-id">{c.id}</span>
+              <span className="ci-id">{c.codigoCaso || `CASO${c.id}`}</span>
               <span className={`prio-dot ${c.prioridade}`} />
             </div>
 

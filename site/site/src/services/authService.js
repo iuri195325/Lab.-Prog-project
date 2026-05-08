@@ -24,6 +24,8 @@ export const authService = {
           id: data.data.id,
           nome: data.data.nome,
           email: data.data.email,
+          tipo: data.data.tipo,
+          tipoNome: data.data.tipoNome,
         }));
       }
 

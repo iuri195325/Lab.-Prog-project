@@ -1,8 +1,4 @@
-// src/components/InboxPanel.jsx
 import './InboxPanel.css'
-
-// Ícones para cada tipo de anexo
-const ANEXO_ICONS = { foto: '📷', video: '🎥', audio: '🎵' }
 
 export default function InboxPanel({ denuncias, onPromover }) {
   return (
@@ -37,19 +33,8 @@ export default function InboxPanel({ denuncias, onPromover }) {
                 <span className={`prio-dot ${d.prioridade}`} />
               </div>
 
-              <div className="dc-local">📍 {d.local}</div>
+              <div className="dc-local"> {d.local}</div>
               <div className="dc-desc">{d.desc}</div>
-
-              <div className="dc-foot">
-                <div className="dc-anexos">
-                  {d.anexos.map(a => (
-                    <span key={a} className="attach">
-                      {ANEXO_ICONS[a]} {a}
-                    </span>
-                  ))}
-                </div>
-                <span className="dc-hora">{d.hora}</span>
-              </div>
             </div>
           ))
         )}

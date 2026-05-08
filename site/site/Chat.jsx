@@ -1,15 +1,20 @@
-// src/components/Chat.jsx
 import { useState, useEffect, useRef } from 'react'
 import './Chat.css'
 
 export default function Chat({ msgs, onEnviar }) {
   const [texto, setTexto] = useState('')
+  const [mensagensLocais, setMensagensLocais] = useState([])
   const bottomRef = useRef(null)
 
-  // Rola para o final sempre que chegam novas mensagens
+  useEffect(() => {
+    if (msgs) {
+      setMensagensLocais(msgs)
+    }
+  }, [msgs])
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [msgs])
+  }, [mensagensLocais])
 
   function handleEnviar() {
     const t = texto.trim()
@@ -33,12 +38,12 @@ export default function Chat({ msgs, onEnviar }) {
       </div>
 
       <div className="chat-msgs">
-        {msgs.length === 0 ? (
+        {mensagensLocais.length === 0 ? (
           <div className="chat-empty">Nenhuma mensagem ainda.</div>
         ) : (
-          msgs.map((m, i) => (
+          mensagensLocais.map((m, i) => (
             <div
-              key={i}
+              key={m.id || `${m.de}-${m.hora}-${i}`}
               className={`msg ${m.de}`}
               style={{ animationDelay: `${i * 0.04}s` }}
             >

@@ -1,10 +1,12 @@
 // src/components/Topbar.jsx
 import { useState, useEffect } from 'react'
+import { authService } from './src/services/authService'
 import './Topbar.css'
 
-export default function Topbar() {
+export default function Topbar({ onConfig }) {
   const [hora, setHora] = useState('')
   const [data, setData] = useState('')
+  const user = authService.getUser()
 
   useEffect(() => {
     function tick() {
@@ -19,14 +21,10 @@ export default function Topbar() {
 
   return (
     <header className="topbar">
-
-      {/* Logo e nome */}
       <div className="topbar-brand">
-        <div className="brand-icon">✦</div>
-        <h1>DISPATCHER<em>NET</em></h1>
+        <div className="brand-icon">D</div>
+        <h1>SISTEMA DE <em>DENUNCIAS</em></h1>
       </div>
-
-      {/* Centro: status ao vivo + relógio */}
       <div className="topbar-mid">
         <span className="live-indicator">
           <span className="live-dot" />
@@ -35,13 +33,16 @@ export default function Topbar() {
         <span className="clock">{hora}</span>
         <span className="today">{data}</span>
       </div>
-
-      {/* Direita: operador logado */}
       <div className="topbar-right">
-        <span className="op-label">OP. CENTRAL</span>
+        {onConfig && (
+          <button className="btn-config" onClick={onConfig}>
+            Configuracoes
+          </button>
+        )}
+        <span className="op-label">{user?.tipoNome || 'OPERADOR'}</span>
         <div className="user-chip">
-          <div className="user-avatar">OP</div>
-          <span>operador</span>
+          <div className="user-avatar">{user?.nome?.charAt(0) || 'U'}</div>
+          <span>{user?.nome || 'Usuario'}</span>
         </div>
       </div>
 
