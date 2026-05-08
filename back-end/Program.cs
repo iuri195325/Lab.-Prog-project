@@ -1,9 +1,16 @@
 using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configurar JSON para usar camelCase (compatibilidade com front-end)
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
@@ -62,5 +69,9 @@ app.MapGet("/", () => "API está funcionando!");
 
 app.MapAuthEndpoints();
 app.MapUsuariosEndpoints();
+app.MapDenunciasEndpoints();
+app.MapCasosEndpoints();
+app.MapViaturasEndpoints();
+app.MapRelatoriosEndpoints();
 
 app.Run();

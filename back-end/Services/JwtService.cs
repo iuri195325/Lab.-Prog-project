@@ -21,7 +21,10 @@ public class JwtService
         {
             new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
             new Claim(ClaimTypes.Name, usuario.Nome),
-            new Claim(ClaimTypes.Email, usuario.Email)
+            new Claim(ClaimTypes.Email, usuario.Email),
+            new Claim(ClaimTypes.Role, usuario.Tipo.ToString()),
+            new Claim("TipoUsuario", usuario.Tipo.ToString()),
+            new Claim("tipo", ((int)usuario.Tipo).ToString())
         };
 
         var tokenDescriptor = new SecurityTokenDescriptor

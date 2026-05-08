@@ -39,6 +39,8 @@ public static class AuthEndpoints
                     usuario.Id,
                     usuario.Nome,
                     usuario.Email,
+                    Tipo = (int)usuario.Tipo,
+                    TipoNome = usuario.Tipo.ToString(),
                     Token = token
                 }
             });

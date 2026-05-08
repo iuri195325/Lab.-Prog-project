@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace back_end.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505213034_AdicionarSistemaDenuncias")]
+    partial class AdicionarSistemaDenuncias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,9 +82,6 @@ namespace back_end.Migrations
                     b.Property<DateTime?>("DataFechamento")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("DataVinculacaoViatura")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<int>("DenunciaOrigemId")
                         .HasColumnType("int");
 
@@ -108,12 +108,6 @@ namespace back_end.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UsuarioVinculacaoViaturaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ViaturaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CodigoCaso")
@@ -123,10 +117,6 @@ namespace back_end.Migrations
                         .IsUnique();
 
                     b.HasIndex("OperadorResponsavelId");
-
-                    b.HasIndex("UsuarioVinculacaoViaturaId");
-
-                    b.HasIndex("ViaturaId");
 
                     b.ToTable("Casos");
                 });
@@ -257,47 +247,6 @@ namespace back_end.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Viatura", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Identificacao")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Observacoes")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Placa")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Identificacao")
-                        .IsUnique();
-
-                    b.HasIndex("Placa")
-                        .IsUnique();
-
-                    b.ToTable("Viaturas");
-                });
-
             modelBuilder.Entity("AnexoDenuncia", b =>
                 {
                     b.HasOne("Denuncia", "Denuncia")
@@ -322,23 +271,9 @@ namespace back_end.Migrations
                         .HasForeignKey("OperadorResponsavelId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("Usuario", "UsuarioVinculacaoViatura")
-                        .WithMany()
-                        .HasForeignKey("UsuarioVinculacaoViaturaId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("Viatura", "Viatura")
-                        .WithMany("Casos")
-                        .HasForeignKey("ViaturaId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.Navigation("DenunciaOrigem");
 
                     b.Navigation("OperadorResponsavel");
-
-                    b.Navigation("UsuarioVinculacaoViatura");
-
-                    b.Navigation("Viatura");
                 });
 
             modelBuilder.Entity("Denuncia", b =>
@@ -388,11 +323,6 @@ namespace back_end.Migrations
                     b.Navigation("Denuncias");
 
                     b.Navigation("Mensagens");
-                });
-
-            modelBuilder.Entity("Viatura", b =>
-                {
-                    b.Navigation("Casos");
                 });
 #pragma warning restore 612, 618
         }
