@@ -7,7 +7,7 @@ public static class RelatoriosEndpoints
     {
         var group = app.MapGroup("/api/relatorios").RequireAuthorization();
 
-        // GET /api/relatorios/dashboard - Estatísticas gerais
+    
         group.MapGet("/dashboard", [Authorize] async (AppDbContext db, HttpContext context, DateTime? dataInicio, DateTime? dataFim) =>
         {
             var userType = context.User.FindFirst("TipoUsuario")?.Value 
