@@ -157,6 +157,8 @@
 
 .status-pill.aberto { background: #44ff44; color: #000; }
 .status-pill.em_andamento { background: #ffaa00; color: #000; }
+.status-pill.finalizado { background: #8b5cf6; color: #fff; }
+.status-pill.resolvido { background: #10b981; color: #fff; }
 .status-pill.fechado { background: #888; color: #fff; }
 
 .ci-anon, .ci-data {
@@ -767,6 +769,143 @@
   padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
+}
+
+/* Seção de Viatura */
+.dv-viatura-section {
+  margin-top: 16px;
+  padding: 16px;
+  border-top: 1px solid #444;
+}
+
+.dv-viatura-section > label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.viatura-vinculada {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.15) 0%, rgba(39, 174, 96, 0.08) 100%);
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(46, 204, 113, 0.4);
+}
+
+.viatura-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #2ecc71;
+  font-weight: 600;
+}
+
+.viatura-info::before {
+  content: "🚔";
+  font-size: 18px;
+}
+
+.viatura-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-desvincular {
+  padding: 10px 16px;
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(192, 57, 43, 0.1) 100%);
+  border: 1px solid rgba(231, 76, 60, 0.5);
+  color: #e74c3c;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-desvincular:hover {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  border-color: #e74c3c;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.btn-finalizar {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(39, 174, 96, 0.35);
+}
+
+.btn-finalizar:hover {
+  background: linear-gradient(135deg, #1e8449 0%, #196f3d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(39, 174, 96, 0.5);
+}
+
+.viatura-vincular {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.viatura-vincular select {
+  flex: 1;
+  padding: 12px 16px;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viatura-vincular select:hover {
+  border-color: #4a90e2;
+}
+
+.viatura-vincular select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.btn-vincular {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(74, 144, 226, 0.35);
+}
+
+.btn-vincular:hover:not(:disabled) {
+  background: linear-gradient(135deg, #357abd 0%, #2a6298 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(74, 144, 226, 0.5);
+}
+
+.btn-vincular:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* Responsividade */

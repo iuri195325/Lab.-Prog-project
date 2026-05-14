@@ -32,6 +32,10 @@ export const casoService = {
   desvincularViatura: async (casoId) => {
     return api.delete(`/casos/${casoId}/desvincular-viatura`);
   },
+
+  finalizarCaso: async (casoId) => {
+    return api.post(`/casos/${casoId}/finalizar`);
+  },
 };
 
 export default casoService;

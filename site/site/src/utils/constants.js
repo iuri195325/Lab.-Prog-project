@@ -17,6 +17,7 @@ export const STATUS_CASO = [
   { value: 'aberto', label: 'Aberto', color: '#3b82f6' },
   { value: 'em_andamento', label: 'Em Andamento', color: '#f59e0b' },
   { value: 'resolvido', label: 'Resolvido', color: '#10b981' },
+  { value: 'finalizado', label: 'Finalizado', color: '#8b5cf6' },
   { value: 'fechado', label: 'Fechado', color: '#6b7280' },
 ];
 

@@ -27,6 +27,7 @@ public static class CasosEndpoints
                 var meusCasos = await db.Casos
                     .Include(c => c.DenunciaOrigem)
                     .Include(c => c.Mensagens)
+                        .ThenInclude(m => m.Usuario)
                     .Include(c => c.Viatura)
                     .Where(c => c.DenunciaOrigem.UsuarioId == userId)
                     .OrderByDescending(c => c.DataAbertura)
@@ -43,6 +44,7 @@ public static class CasosEndpoints
             var casos = await db.Casos
                 .Include(c => c.OperadorResponsavel)
                 .Include(c => c.Mensagens)
+                    .ThenInclude(m => m.Usuario)
                 .Include(c => c.Viatura)
                 .OrderByDescending(c => c.DataAbertura)
                 .ToListAsync();
@@ -270,6 +272,41 @@ public static class CasosEndpoints
             await db.SaveChangesAsync();
 
             return Results.Ok(new { message = "Viatura vinculada com sucesso" });
+        });
+
+        // POST /api/casos/{id}/finalizar - Finalizar caso e liberar viatura
+        group.MapPost("/{id}/finalizar", async (int id, AppDbContext db, ClaimsPrincipal user) =>
+        {
+            var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdClaim)) return Results.Unauthorized();
+
+            var userId = int.Parse(userIdClaim);
+            var usuario = await db.Usuarios.FindAsync(userId);
+
+            if (usuario == null || (usuario.Tipo != TipoUsuario.Administrador && usuario.Tipo != TipoUsuario.Operador))
+            {
+                return Results.Forbid();
+            }
+
+            var caso = await db.Casos.Include(c => c.Viatura).FirstOrDefaultAsync(c => c.Id == id);
+            if (caso == null) return Results.NotFound(new { message = "Caso não encontrado" });
+
+            // Liberar viatura se houver uma vinculada
+            if (caso.Viatura != null)
+            {
+                caso.Viatura.Status = "Disponível";
+            }
+
+            // Atualizar status do caso
+            caso.Status = "finalizado";
+            caso.DataFechamento = DateTime.UtcNow;
+            caso.ViaturaId = null;
+            caso.DataVinculacaoViatura = null;
+            caso.UsuarioVinculacaoViaturaId = null;
+
+            await db.SaveChangesAsync();
+
+            return Results.Ok(new { message = "Caso finalizado com sucesso" });
         });
 
         // DELETE /api/casos/{id}/desvincular-viatura - Desvincular viatura do caso

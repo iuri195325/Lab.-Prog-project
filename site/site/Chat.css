@@ -48,11 +48,10 @@
   flex-direction: column;
   gap: 2px;
   max-width: 68%;
-  animation: slideIn .2s ease forwards;
-  opacity: 0;
 }
 
 .msg.op  { align-self: flex-end;   align-items: flex-end; }
+.msg.denunciante { align-self: flex-start; }
 .msg.usr { align-self: flex-start; }
 
 .msg-bub {
@@ -63,6 +62,7 @@
 }
 
 .msg.op  .msg-bub { background: var(--blue);  color: #fff;          border-bottom-right-radius: 2px; }
+.msg.denunciante .msg-bub { background: var(--bg3);   border: 1px solid var(--border); color: var(--text1); border-bottom-left-radius: 2px; }
 .msg.usr .msg-bub { background: var(--bg3);   border: 1px solid var(--border); color: var(--text1); border-bottom-left-radius: 2px; }
 
 .msg-meta {

@@ -115,6 +115,7 @@ erDiagram
 ### Status do Caso
 - `aberto`
 - `em_andamento`
+- `finalizado`
 - `resolvido`
 - `fechado`
 

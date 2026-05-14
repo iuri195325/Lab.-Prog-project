@@ -6,7 +6,7 @@ import { casoService } from './src/services/casoService'
 import { toast } from 'react-toastify'
 import './DetailPanel.css'
 
-export default function DetailPanel({ caso, onEnviarMsg, onViaturaVinculada }) {
+export default function DetailPanel({ caso, onViaturaVinculada }) {
   const [viaturasDisponiveis, setViaturasDisponiveis] = useState([])
   const [viaturaSelecionada, setViaturaSelecionada] = useState('')
   const [loadingViaturas, setLoadingViaturas] = useState(false)
@@ -15,7 +15,7 @@ export default function DetailPanel({ caso, onEnviarMsg, onViaturaVinculada }) {
     if (caso && !caso.viatura) {
       carregarViaturasDisponiveis()
     }
-  }, [caso])
+  }, [caso?.id, caso?.viatura])
 
   const carregarViaturasDisponiveis = async () => {
     try {
@@ -52,6 +52,19 @@ export default function DetailPanel({ caso, onEnviarMsg, onViaturaVinculada }) {
       if (onViaturaVinculada) onViaturaVinculada()
     } catch (error) {
       toast.error(error.message || 'Erro ao desvincular viatura')
+    }
+  }
+
+  const handleFinalizarCaso = async () => {
+    if (!window.confirm('Deseja realmente finalizar este caso? A viatura será liberada.')) {
+      return
+    }
+    try {
+      await casoService.finalizarCaso(caso.id)
+      toast.success('Caso finalizado com sucesso!')
+      if (onViaturaVinculada) onViaturaVinculada()
+    } catch (error) {
+      toast.error(error.message || 'Erro ao finalizar caso')
     }
   }
 
@@ -121,9 +134,14 @@ export default function DetailPanel({ caso, onEnviarMsg, onViaturaVinculada }) {
               <span className="viatura-info">
                 {caso.viatura.identificacao} - {caso.viatura.placa}
               </span>
-              <button className="btn-desvincular" onClick={handleDesvincularViatura}>
-                Desvincular
-              </button>
+              <div className="viatura-actions">
+                <button className="btn-desvincular" onClick={handleDesvincularViatura}>
+                  Desvincular
+                </button>
+                <button className="btn-finalizar" onClick={handleFinalizarCaso}>
+                  Finalizar Caso
+                </button>
+              </div>
             </div>
           ) : (
             <div className="viatura-vincular">
@@ -153,7 +171,7 @@ export default function DetailPanel({ caso, onEnviarMsg, onViaturaVinculada }) {
         </div>
       </div>
 
-      <Chat msgs={caso.msgs} onEnviar={onEnviarMsg} />
+      <Chat casoId={caso.id} />
 
     </div>
   )

@@ -4,6 +4,7 @@ import { denunciaService } from '../../../services/denunciaService';
 import { toast } from 'react-toastify';
 import DenunciaForm from '../DenunciaForm/DenunciaForm';
 import MinhasDenuncias from '../MinhasDenuncias/MinhasDenuncias';
+import MeusCasos from '../MeusCasos/MeusCasos';
 import './UserPanel.css';
 
 export default function UserPanel() {
@@ -112,6 +113,12 @@ export default function UserPanel() {
               {denuncias.length > 0 && <span className="nav-badge">{denuncias.length}</span>}
             </button>
             <button
+              className={`nav-item ${activeTab === 'casos' ? 'active' : ''}`}
+              onClick={() => { setActiveTab('casos'); setDenunciaEditando(null); }}
+            >
+              Meus Casos
+            </button>
+            <button
               className={`nav-item ${activeTab === 'nova' ? 'active' : ''}`}
               onClick={() => { setActiveTab('nova'); setDenunciaEditando(null); }}
             >
@@ -136,6 +143,9 @@ export default function UserPanel() {
               onEditar={handleEditar}
               onExcluir={handleExcluir}
             />
+          )}
+          {activeTab === 'casos' && (
+            <MeusCasos />
           )}
         </main>
       </div>

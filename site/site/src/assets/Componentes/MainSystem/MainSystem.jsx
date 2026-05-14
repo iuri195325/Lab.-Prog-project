@@ -102,36 +102,6 @@ export default function MainSystem() {
     setCasoSelecionado(casoId)
   }
 
-  const handleEnviarMensagem = useCallback(async (texto) => {
-    if (!casoSelecionado) return
-
-    try {
-      await casoService.enviarMensagem(casoSelecionado, texto)
-      
-      // Atualizar mensagens localmente
-      const novaMensagem = {
-        id: Date.now(),
-        de: 'op',
-        txt: texto,
-        hora: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
-      }
-
-      setCasos(prevCasos => prevCasos.map(caso => 
-        caso.id === casoSelecionado 
-          ? { ...caso, msgs: [...caso.msgs, novaMensagem] }
-          : caso
-      ))
-
-      toast.info('Mensagem enviada ao denunciante', {
-        position: "top-right",
-        autoClose: 1500,
-      })
-    } catch (error) {
-      console.error('Erro ao enviar mensagem:', error)
-      toast.error('Erro ao enviar mensagem')
-    }
-  }, [casoSelecionado])
-
   const casoAtual = casos.find(c => c.id === casoSelecionado)
 
   if (showConfig && isAdmin) {
@@ -156,7 +126,6 @@ export default function MainSystem() {
         
         <DetailPanel 
           caso={casoAtual}
-          onEnviarMsg={handleEnviarMensagem}
           onViaturaVinculada={carregarDados}
         />
       </div>

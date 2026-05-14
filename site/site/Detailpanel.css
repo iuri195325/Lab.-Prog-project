@@ -168,6 +168,30 @@
   box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
+.viatura-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-finalizar {
+  padding: 8px 14px;
+  background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.btn-finalizar:hover {
+  background: linear-gradient(135deg, #1e8449 0%, #196f3d 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+}
+
 .viatura-vincular {
   display: flex;
   gap: 10px;

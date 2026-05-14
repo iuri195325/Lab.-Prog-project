@@ -77,8 +77,9 @@ flowchart TB
 ### 3. Operador
 - Visualiza denúncias pendentes (Inbox)
 - Promove denúncias para casos
-- Gerencia casos e envia mensagens
-- Vincula viaturas aos casos
+- Gerencia casos e envia mensagens via chat
+- Vincula/desvincula viaturas aos casos
+- Finaliza casos (libera viatura automaticamente)
 
 ### 4. Administrador
 - Todas as funções do operador
@@ -94,6 +95,6 @@ flowchart TB
 |--------|-----------|
 | Auth | `POST /login` |
 | Denúncias | `GET, POST, PUT, DELETE` |
-| Casos | `GET, PUT, POST /mensagens` |
-| Viaturas | `GET, POST, PUT, DELETE` |
-| Relatórios | `GET /dashboard` |
+| Casos | `GET, PUT, POST /{id}/mensagens, POST /{id}/vincular-viatura, POST /{id}/finalizar` |
+| Viaturas | `GET, POST, PUT, DELETE, GET /disponiveis` |
+| Relatórios | `GET /dashboard, GET /casos-por-status, GET /casos-por-tipo` |
